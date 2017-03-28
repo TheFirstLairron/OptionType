@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Option
+﻿namespace Option
 {
     public abstract class Option<T>
     {
@@ -40,6 +36,11 @@ namespace Option
             return result;
         }
 
+        public override int GetHashCode()
+        {
+            return value.GetHashCode();
+        }
+
         public override string ToString()
         {
             return $"Some<{typeof(T).Name}>({value})";
@@ -65,9 +66,14 @@ namespace Option
             return result;
         }
 
+        public override int GetHashCode()
+        {
+            return 0;
+        }
+
         public override string ToString()
         {
             return $"None<{typeof(T).Name}>";
-        }
+        }        
     }
 }

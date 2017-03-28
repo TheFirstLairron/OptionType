@@ -90,6 +90,35 @@ namespace OptionTests
             Assert.AreEqual(val1, val2, $"The two Nones are not equal: {val1}, {val2}");
         }
 
+        [TestMethod]
+        public void CheckThatNonesWithDifferentTypesArentEqual()
+        {
+            None<int> val1 = new None<int>();
+            None<string> val2 = new None<string>();
+
+            Assert.AreNotEqual(val1, val2, $"The two Nones are not supposed to be equal: {val1}, {val2}");
+        }
+
+        [TestMethod]
+        public void TestExtractionOfReferenceTypesInSomeWithSameObject()
+        {
+            Some<List<string>> list = new Some<List<string>>(dummyData);
+
+            List<string> value = list.GetValue();
+
+            Assert.AreEqual(dummyData, value, "Reference type is not extracted properly from the Some");
+        }
+
+        [TestMethod]
+        public void TestExtractionOfReferenceTypesInSomeWithDifferentObject()
+        {
+            Some<List<string>> list = new Some<List<string>>(new List<string> { "test" });
+
+            List<string> value = list.GetValue();
+
+            Assert.AreNotEqual(dummyData, value, "Reference type is not extracted properly from the Some");
+        }
+
         public static Option<int> FindPosition<T>(List<T> list, T value)
         {
             for (int i = 0; i < list.Count; i++)
