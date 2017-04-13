@@ -39,9 +39,9 @@ namespace OptionTests
 
             Option<int> result = FindPosition<string>(dummyData, itemToFind);
 
-            if(result is Some<int>)
+            if(result is Some<int> validResult)
             {
-                int valReturned = (result as Some<int>).GetValue();
+                int valReturned = validResult.GetValue();
 
                 Assert.AreEqual<int>(indexExpected, valReturned, $"Values are not the same: {indexExpected}, {valReturned}");
             }
