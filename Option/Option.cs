@@ -1,4 +1,6 @@
-﻿namespace Option
+﻿using System.Collections.Generic;
+
+namespace Option
 {
     public abstract class Option<T>
     {
@@ -47,7 +49,7 @@
         }
     }
 
-    public class None<T> : Option<T>
+    public class None<T> : Option<T> where T : IEnumerable
     {
         public None()
         {
