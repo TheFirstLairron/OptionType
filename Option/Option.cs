@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Option
+namespace Ignitus.Option
 {
     public abstract class Option<T>
     {
