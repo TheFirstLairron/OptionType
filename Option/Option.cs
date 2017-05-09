@@ -49,7 +49,7 @@ namespace Option
         }
     }
 
-    public class None<T> : Option<T> where T : IEnumerable
+    public class None<T> : Option<T>
     {
         public None()
         {
