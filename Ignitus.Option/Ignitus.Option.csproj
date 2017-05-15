@@ -2,6 +2,21 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.6</TargetFramework>
+    <Version>1.0.1</Version>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Description>An option type for C#</Description>
+    <PackageLicenseUrl>https://github.com/TheFirstLairron/OptionType/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageIconUrl></PackageIconUrl>
+    <PackageProjectUrl>https://github.com/TheFirstLairron/OptionType</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/TheFirstLairron/OptionType</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>C# Option</PackageTags>
+    <PackageReleaseNotes>Slight tweak to internals. No longer creates an object with None</PackageReleaseNotes>
+    <Authors>Ignitus.Option</Authors>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NuGet.CommandLine" Version="3.5.0" />
+  </ItemGroup>
 
 </Project>

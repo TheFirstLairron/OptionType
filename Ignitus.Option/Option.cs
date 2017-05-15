@@ -2,37 +2,32 @@
 
 namespace Ignitus.Option
 {
-    public abstract class Option<T>
-    {
-        protected T value;   
-    }
+    public abstract class Option<T>{ }
 
     public class Some<T> : Option<T>
     {
+        private T Value { get; set; }
+
         public Some(T val)
         {
-            value = val;
+            Value = val;
         }
 
         public T GetValue()
         {
-            return value;
+            return Value;
         }
 
         public override bool Equals(object obj)
         {
-            bool result = true;
+            bool result = false;
 
             if (obj is Some<T>)
             {
-                if (!(obj as Some<T>).GetValue().Equals(GetValue()))
+                if ((obj as Some<T>).GetValue().Equals(GetValue()))
                 {
-                    result = false;
+                    result = true;
                 }
-            }
-            else
-            {
-                result = false;
             }
 
             return result;
@@ -40,29 +35,26 @@ namespace Ignitus.Option
 
         public override int GetHashCode()
         {
-            return value.GetHashCode();
+            return Value.GetHashCode();
         }
 
         public override string ToString()
         {
-            return $"Some<{typeof(T).Name}>({value})";
+            return $"Some<{typeof(T).Name}>({Value})";
         }
     }
 
     public class None<T> : Option<T>
     {
-        public None()
-        {
-            value = default(T);
-        }
+        public None(){ }
 
         public override bool Equals(object obj)
         {
-            bool result = true;
+            bool result = false;
 
-            if (!(obj is None<T>))
+            if (obj is None<T>)
             {
-                result = false;
+                result = true;
             }
 
             return result;
