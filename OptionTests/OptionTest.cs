@@ -16,9 +16,9 @@ namespace OptionTests
         {
             string notFound = "notFound";
 
-            Option<int> option = FindPosition<string>(dummyData, notFound);
+            Option option = FindPosition<string>(dummyData, notFound);
 
-            Assert.IsTrue(option is None<int>, $"The returned Option type is not a None: {option}");
+            Assert.IsTrue(option is None, $"The returned Option type is not a None: {option}");
         }
 
         [TestMethod]
@@ -26,7 +26,7 @@ namespace OptionTests
         {
             string found = "data";
 
-            Option<int> option = FindPosition<string>(dummyData, found);
+            Option option = FindPosition<string>(dummyData, found);
 
             Assert.IsTrue(option is Some<int>, $"The returned Option type not a Some: {option}");
         }
@@ -37,13 +37,13 @@ namespace OptionTests
             string itemToFind = "data";
             const int indexExpected = 6;
 
-            Option<int> result = FindPosition<string>(dummyData, itemToFind);
+            Option result = FindPosition<string>(dummyData, itemToFind);
 
             if(result is Some<int> validResult)
             {
                 int valReturned = validResult.GetValue();
 
-                Assert.AreEqual<int>(indexExpected, valReturned, $"Values are not the same: {indexExpected}, {valReturned}");
+                Assert.AreEqual(indexExpected, valReturned, $"Values are not the same: {indexExpected}, {valReturned}");
             }
 
         }
@@ -81,22 +81,13 @@ namespace OptionTests
         }
 
         [TestMethod]
-        public void CheckNoneEqualToNoneSameType()
+        public void CheckNoneEqualToNone()
         {
-            None<int> val1 = new None<int>();
-            None<int> val2 = new None<int>();
+            None val1 = new None();
+            None val2 = new None();
 
 
             Assert.AreEqual(val1, val2, $"The two Nones are not equal: {val1}, {val2}");
-        }
-
-        [TestMethod]
-        public void CheckThatNonesWithDifferentTypesArentEqual()
-        {
-            None<int> val1 = new None<int>();
-            None<string> val2 = new None<string>();
-
-            Assert.AreNotEqual(val1, val2, $"The two Nones are not supposed to be equal: {val1}, {val2}");
         }
 
         [TestMethod]
@@ -119,7 +110,32 @@ namespace OptionTests
             Assert.AreNotEqual(dummyData, value, "Reference type is not extracted properly from the Some");
         }
 
-        public static Option<int> FindPosition<T>(List<T> list, T value)
+        [TestMethod]
+        public void OptionifyReturnsNoneWhenPassedNull()
+        {
+            Option result = Option.Optionify<string>(null);
+
+            Assert.IsTrue(result is None, "Optionify returned a non-None value when passed in null");
+        }
+
+        [TestMethod]
+        public void OptionifyReturnsValueWhenPassedAValue()
+        {
+            const string VALUE = "test";
+
+            Option result = Option.Optionify<string>(VALUE);
+
+            if (result is Some<string> res)
+            {
+                Assert.AreEqual(VALUE, res.GetValue(), "The value passed into Optionify was not propogated to the returned Some");
+            }
+            else
+            {
+                Assert.Fail("Optionify returned something other than Some");
+            }
+        }
+
+        public static Option FindPosition<T>(List<T> list, T value)
         {
             for (int i = 0; i < list.Count; i++)
             {
@@ -129,7 +145,7 @@ namespace OptionTests
                 }
             }
 
-            return new None<int>();
+            return new None();
         }
     }
 }
