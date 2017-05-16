@@ -2,9 +2,20 @@
 
 namespace Ignitus.Option
 {
-    public abstract class Option<T>{ }
+    public abstract class Option
+    {
+        public static Option Optionify<T>(T item)
+        {
+            if(item != null)
+            {
+                return new Some<T>(item);
+            }
 
-    public class Some<T> : Option<T>
+            return new None();
+        }
+    }
+
+    public class Some<T> : Option
     {
         private T Value { get; set; }
 
@@ -44,7 +55,7 @@ namespace Ignitus.Option
         }
     }
 
-    public class None<T> : Option<T>
+    public class None : Option
     {
         public None(){ }
 
@@ -52,7 +63,7 @@ namespace Ignitus.Option
         {
             bool result = false;
 
-            if (obj is None<T>)
+            if (obj is None)
             {
                 result = true;
             }
@@ -67,7 +78,7 @@ namespace Ignitus.Option
 
         public override string ToString()
         {
-            return $"None<{typeof(T).Name}>";
+            return $"None";
         }        
     }
 }
