@@ -11,7 +11,9 @@
     <RepositoryUrl>https://github.com/TheFirstLairron/OptionType</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>C# Option</PackageTags>
-    <PackageReleaseNotes>Slight tweak to internals. No longer creates an object with None</PackageReleaseNotes>
+    <PackageReleaseNotes>- Removed generic type annotations from Option and None.
+- Added an Optionify method to Option.
+- Altered/Added some tests</PackageReleaseNotes>
     <Authors>Ignitus.Option</Authors>
   </PropertyGroup>
 
