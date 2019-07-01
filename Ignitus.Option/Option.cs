@@ -17,16 +17,11 @@ namespace Ignitus.Option
 
     public class Some<T> : Option
     {
-        private T Value { get; set; }
+        public T Value { get; private set; }
 
         public Some(T val)
         {
             Value = val;
-        }
-
-        public T GetValue()
-        {
-            return Value;
         }
 
         public override bool Equals(object obj)
@@ -35,7 +30,7 @@ namespace Ignitus.Option
 
             if (obj is Some<T>)
             {
-                if ((obj as Some<T>).GetValue().Equals(GetValue()))
+                if ((obj as Some<T>).Value.Equals(Value))
                 {
                     result = true;
                 }

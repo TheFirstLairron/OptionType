@@ -1,20 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.6</TargetFramework>
-    <Version>2.0.0</Version>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Version>3.0.0</Version>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Description>An option type for C#</Description>
-    <PackageLicenseUrl>https://github.com/TheFirstLairron/OptionType/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseUrl></PackageLicenseUrl>
     <PackageIconUrl></PackageIconUrl>
     <PackageProjectUrl>https://github.com/TheFirstLairron/OptionType</PackageProjectUrl>
     <RepositoryUrl>https://github.com/TheFirstLairron/OptionType</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>C# Option</PackageTags>
-    <PackageReleaseNotes>- Removed generic type annotations from Option and None.
-- Added an Optionify method to Option.
-- Altered/Added some tests</PackageReleaseNotes>
+    <PackageReleaseNotes>- Tweaked Value access to be less verbose.</PackageReleaseNotes>
     <Authors>Ignitus.Option</Authors>
+    <PackageLicenseExpression></PackageLicenseExpression>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,6 +24,13 @@
 
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

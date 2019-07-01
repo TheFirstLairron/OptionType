@@ -41,7 +41,7 @@ namespace OptionTests
 
             if(result is Some<int> validResult)
             {
-                int valReturned = validResult.GetValue();
+                int valReturned = validResult.Value;
 
                 Assert.AreEqual(indexExpected, valReturned, $"Values are not the same: {indexExpected}, {valReturned}");
             }
@@ -95,7 +95,7 @@ namespace OptionTests
         {
             Some<List<string>> list = new Some<List<string>>(dummyData);
 
-            List<string> value = list.GetValue();
+            List<string> value = list.Value;
 
             Assert.AreEqual(dummyData, value, "Reference type is not extracted properly from the Some");
         }
@@ -105,7 +105,7 @@ namespace OptionTests
         {
             Some<List<string>> list = new Some<List<string>>(new List<string> { "test" });
 
-            List<string> value = list.GetValue();
+            List<string> value = list.Value;
 
             Assert.AreNotEqual(dummyData, value, "Reference type is not extracted properly from the Some");
         }
@@ -127,7 +127,7 @@ namespace OptionTests
 
             if (result is Some<string> res)
             {
-                Assert.AreEqual(VALUE, res.GetValue(), "The value passed into Optionify was not propogated to the returned Some");
+                Assert.AreEqual(VALUE, res.Value, "The value passed into Optionify was not propogated to the returned Some");
             }
             else
             {
