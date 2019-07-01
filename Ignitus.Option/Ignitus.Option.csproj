@@ -11,7 +11,7 @@
     <RepositoryUrl>https://github.com/TheFirstLairron/OptionType</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>C# Option</PackageTags>
-    <PackageReleaseNotes>- Tweaked Value access to be less verbose.</PackageReleaseNotes>
+    <PackageReleaseNotes>- Added typings to the base type.</PackageReleaseNotes>
     <Authors>Ignitus.Option</Authors>
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
