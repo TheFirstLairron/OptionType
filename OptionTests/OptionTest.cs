@@ -16,9 +16,9 @@ namespace OptionTests
         {
             string notFound = "notFound";
 
-            Option option = FindPosition<string>(dummyData, notFound);
+            Option<int> option = FindPosition(dummyData, notFound);
 
-            Assert.IsTrue(option is None, $"The returned Option type is not a None: {option}");
+            Assert.IsTrue(option is None<int>, $"The returned Option type is not a None: {option}");
         }
 
         [TestMethod]
@@ -26,7 +26,7 @@ namespace OptionTests
         {
             string found = "data";
 
-            Option option = FindPosition<string>(dummyData, found);
+            Option<int> option = FindPosition(dummyData, found);
 
             Assert.IsTrue(option is Some<int>, $"The returned Option type not a Some: {option}");
         }
@@ -37,7 +37,7 @@ namespace OptionTests
             string itemToFind = "data";
             const int indexExpected = 6;
 
-            Option result = FindPosition<string>(dummyData, itemToFind);
+            Option<int> result = FindPosition(dummyData, itemToFind);
 
             if(result is Some<int> validResult)
             {
@@ -83,8 +83,8 @@ namespace OptionTests
         [TestMethod]
         public void CheckNoneEqualToNone()
         {
-            None val1 = new None();
-            None val2 = new None();
+            None<int> val1 = new None<int>();
+            None<int> val2 = new None<int>();
 
 
             Assert.AreEqual(val1, val2, $"The two Nones are not equal: {val1}, {val2}");
@@ -113,9 +113,9 @@ namespace OptionTests
         [TestMethod]
         public void OptionifyReturnsNoneWhenPassedNull()
         {
-            Option result = Option.Optionify<string>(null);
+            Option<string> result = Option<string>.Optionify(null);
 
-            Assert.IsTrue(result is None, "Optionify returned a non-None value when passed in null");
+            Assert.IsTrue(result is None<string>, "Optionify returned a non-None value when passed in null");
         }
 
         [TestMethod]
@@ -123,7 +123,7 @@ namespace OptionTests
         {
             const string VALUE = "test";
 
-            Option result = Option.Optionify<string>(VALUE);
+            Option<string> result = Option<string>.Optionify(VALUE);
 
             if (result is Some<string> res)
             {
@@ -135,7 +135,7 @@ namespace OptionTests
             }
         }
 
-        public static Option FindPosition<T>(List<T> list, T value)
+        public static Option<int> FindPosition(List<string> list, string value)
         {
             for (int i = 0; i < list.Count; i++)
             {
@@ -145,7 +145,7 @@ namespace OptionTests
                 }
             }
 
-            return new None();
+            return new None<int>();
         }
     }
 }
