@@ -135,6 +135,58 @@ namespace OptionTests
             }
         }
 
+        [TestMethod]
+        public void IsSomeReturnsTrueIfSome()
+        {
+            Option<string> result = new Some<string>("test");
+
+            Assert.IsTrue(result.IsSome());
+        }
+
+        [TestMethod]
+        public void IsSomeReturnsFalseIfNone()
+        {
+            Option<string> result = new None<string>();
+
+            Assert.IsFalse(result.IsSome());
+        }
+
+        [TestMethod]
+        public void IsNoneReturnsFalseIfSome()
+        {
+            Option<string> result = new Some<string>("test");
+
+            Assert.IsFalse(result.IsNone());
+        }
+
+        [TestMethod]
+        public void IsNoneReturnTrueIfNone()
+        {
+            Option<string> result = new None<string>();
+
+            Assert.IsTrue(result.IsNone());
+        }
+
+        [TestMethod]
+        public void GetOrDefaultReturnsValueIfSome()
+        {
+            Option<string> result = new Some<string>("Success");
+
+            string value = result.GetOrDefault("Failure");
+
+            Assert.AreEqual("Success", value);
+        }
+
+        [TestMethod]
+        public void GetOrDefaultReturnsDefaultIfNone()
+        {
+            Option<string> result = new None<string>();
+
+            string value = result.GetOrDefault("Success");
+
+            Assert.AreEqual("Success", value);
+        }
+
         public static Option<int> FindPosition(List<string> list, string value)
         {
             for (int i = 0; i < list.Count; i++)
