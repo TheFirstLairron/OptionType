@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace Ignitus.Option
+﻿namespace Ignitus.Option
 {
-    public abstract class Option<T>
+    public abstract class Option<T> where T : notnull
     {
         public static Option<T> Optionify(T item)
         {
@@ -21,7 +19,7 @@ namespace Ignitus.Option
         public abstract T GetOrDefault(T value);
     }
 
-    public class Some<T> : Option<T>
+    public class Some<T> : Option<T> where T : notnull
     {
         public T Value { get; private set; }
 
@@ -49,9 +47,9 @@ namespace Ignitus.Option
         {
             bool result = false;
 
-            if (obj is Some<T>)
+            if (obj is Some<T> option)
             {
-                if ((obj as Some<T>).Value.Equals(Value))
+                if (option.Value.Equals(Value))
                 {
                     result = true;
                 }
@@ -71,7 +69,7 @@ namespace Ignitus.Option
         }
     }
 
-    public class None<T> : Option<T>
+    public class None<T> : Option<T> where T : notnull
     {
         public None() { }
 

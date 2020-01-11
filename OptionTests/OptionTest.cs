@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ignitus.Option;
+using System.Net.Http;
 
 namespace OptionTests
 {
@@ -39,13 +40,12 @@ namespace OptionTests
 
             Option<int> result = FindPosition(dummyData, itemToFind);
 
-            if(result is Some<int> validResult)
+            if (result is Some<int> validResult)
             {
                 int valReturned = validResult.Value;
 
                 Assert.AreEqual(indexExpected, valReturned, $"Values are not the same: {indexExpected}, {valReturned}");
             }
-
         }
 
         [TestMethod]
@@ -113,7 +113,14 @@ namespace OptionTests
         [TestMethod]
         public void OptionifyReturnsNoneWhenPassedNull()
         {
+            /*
+             * -----------------------------------------------------------------------------------------------------------------------
+             * We are intentionally allowing this value to accept nulls, but this project is built using non-nullable reference types.
+             * -----------------------------------------------------------------------------------------------------------------------
+             */
+            #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
             Option<string> result = Option<string>.Optionify(null);
+            #pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 
             Assert.IsTrue(result is None<string>, "Optionify returned a non-None value when passed in null");
         }
@@ -185,6 +192,17 @@ namespace OptionTests
             string value = result.GetOrDefault("Success");
 
             Assert.AreEqual("Success", value);
+        }
+
+        public void OptionSupportsComplexObjects()
+        {
+            HttpClient client = new HttpClient();
+            Option<HttpClient> test = new Some<HttpClient>(client);
+
+            if(test is Some<HttpClient> result)
+            {
+                Assert.AreEqual(client, result.Value, "The HTTP Client was found to be different after removing it from the Option Type");
+            }
         }
 
         public static Option<int> FindPosition(List<string> list, string value)
